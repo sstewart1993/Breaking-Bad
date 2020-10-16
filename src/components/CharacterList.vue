@@ -1,7 +1,7 @@
 <template>
-  <div v-if="pokemons">
+  <div v-if="characters">
       <ul>
-          <list-item v-for="(pokemon, index) in pokemons" :pokemon="pokemon" :key="index"></list-item>
+          <list-item v-for="(character, index) in characters" :character="character" :key="index"></list-item>
       </ul>
   </div>
 </template>
@@ -10,8 +10,8 @@
 import ListItem from './ListItem';
 
 export default {
-    name: "poke-list",
-    props: ["pokemons"],
+    name: "character-list",
+    props: ["characters"],
     components: {
         "list-item":ListItem
     }

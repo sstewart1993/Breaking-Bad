@@ -1,5 +1,5 @@
-<template>
-<li v-on:click="handleClick"> {{pokemon.name}} {{pokemon.nickname}}</li>
+<template lang="html">
+<li v-on:click="handleClick"> Name:{{character.name}}</li>
   
 </template>
 
@@ -8,12 +8,12 @@ import {eventBus} from '../main.js'
 
 export default {
     name:"list-item",
-    props: ['pokemon'],
+    props: ['character'],
     methods:{
-        handleClick(){
-            eventBus.$emit('pokemon-selected', this.pokemon)
-        }
+    handleClick(){
+    eventBus.$emit('character-selected', this.character)
     }
+}
 
 }
 </script>

@@ -2,7 +2,14 @@
 <div id="app">
 <h1> BREAKING BAD</h1>  
   <div class='main-container'>
-  <pokemons-list :pokemons='pokemons'></pokemons-list>
+  <!-- <characters-list :characters='characters'></characters-list> -->
+  <label for="character_select">Select a character:</label>
+    <select id="character_select" v-model="characterSelected">
+      <option disabled value="">Select a character</option>
+      <option v-for="(character, index) in characters" :value="character" 
+      :key="index">{{character.name}}</option>
+    </select>
+  <character-detail :character="characterSelected"></character-detail>
 
   </div>
 </div>
@@ -10,34 +17,39 @@
 
 <script>
 import { eventBus } from './main.js'
-import PokeList from './components/PokeList';
+import CharacterList from './components/CharacterList'
+import CharacterDetail from './components/CharacterDetail'
+import FavouriteCharacters from './components/FavouriteCharacters'
 
 
 export default {
   name: 'App',
   data(){
     return{
-    pokemons: [],
-    pokemonSelected: null,
+    characters: [],
+    characterSelected: null,
 }
 },
 
 components: {
-  "pokemons-list": PokeList,
+  "characters-list": CharacterList,
+  "character-detail": CharacterDetail,
+  "favourite-characters": FavouriteCharacters,
 
 },
 
 mounted(){
   fetch('https://www.breakingbadapi.com/api/characters')
   .then(res => res.json(name))
-  .then(pokemons => this.pokemons = pokemons)
+  .then(characters => this.characters = characters)
 
-  eventBus.$on('pokemon-selected', this.pokemon)
+  eventBus.$on('character-selected', (character) => {
+    this.characterSelected = character
+})
 
-},
 // methods(){
 // },
-
+}
 }
 </script>
 
@@ -49,5 +61,12 @@ mounted(){
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+ul{
+  list-style: none;
+}
+
+.image{
+  height:200px
 }
 </style>
