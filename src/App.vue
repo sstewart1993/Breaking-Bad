@@ -9,7 +9,11 @@
       <option v-for="(character, index) in characters" :value="character" 
       :key="index">{{character.name}}</option>
     </select>
+
   <character-detail :character="characterSelected"></character-detail>
+
+  <favourite-characters :FavouriteCharacters='FavouriteCharacters'></favourite-characters>
+  <button v-on:click="addToFavourites">Add Character</button>
 
   </div>
 </div>
@@ -28,6 +32,7 @@ export default {
     return{
     characters: [],
     characterSelected: null,
+    FavouriteCharacters: [],
 }
 },
 
@@ -46,9 +51,11 @@ mounted(){
   eventBus.$on('character-selected', (character) => {
     this.characterSelected = character
 })
-
-// methods(){
-// },
+},
+methods: {
+  addToFavourites: function(){
+    this.FavouriteCharacters.push(this.characterSelected)
+  }
 }
 }
 </script>
@@ -68,5 +75,9 @@ ul{
 
 .image{
   height:200px
+}
+
+.small-image{
+  height:100px
 }
 </style>
