@@ -1,9 +1,10 @@
 <template>
-<div class="character_details" v-if="character">
-    <h3>{{ character.name }}</h3>
-    <p>{{ character.nickname }}</p>
-    <p>{{ character.occupation }}</p>
-
+<div class="character-details" v-if="character">
+    <h2>Character Details</h2>
+    <p>Name: {{ character.name }}</p>
+    <p>Alias: {{ character.nickname }}</p>
+    <p>Occupation: {{ character.occupation }}</p>
+    <!-- <p>{{ quotes.quote }}</p> -->
     <img class="image" :src="character.img">
 </div>
   
