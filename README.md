@@ -1,4 +1,5 @@
 # BreakingBad
+By using an api I have arranged a complete list of all the main characters and episodes from Breaking Bad and Better Call Saul along with some key information on both.
 
 ## Project setup
 ```
