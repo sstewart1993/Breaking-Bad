@@ -1,5 +1,6 @@
 <template>
 <div id="app">
+  <vue-headful title="Breaking Bad"/>
 <h1> BREAKING BAD</h1>  
   <div class='main-container'>
   <!-- <characters-list :characters='characters'></characters-list> -->
@@ -13,7 +14,7 @@
     </select>
     </div>
 
-    <button v-on:click="addToFavourites">Add Character</button>
+    <button class="add_button" v-on:click="addToFavourites">Add Character</button>
  
 
 
@@ -23,7 +24,7 @@
   </div>
 
   <div class="episode-drop-down">
-    <h2>Select an Episode: </h2>
+    <h2 class = "episode_header">Select an Episode: </h2>
     <label for="episode_select"></label>
     <select id="episode_select" v-model="episodeSelected">
       <option disabled value="">Select episode</option>
@@ -88,6 +89,10 @@ mounted(){
   eventBus.$on('episode-selected', (episode) => {
     this.episodeSelected = episode
   })
+
+    eventBus.$on('deleteCharacter', (character) => {
+    this.FavouriteCharacters.splice(this.FavouriteCharacters.indexOf(character.name, 1))
+  })
 },
 
 methods: {
@@ -100,8 +105,16 @@ methods: {
 
 <style>
 body{
-  background-image: url('./static/background.jpg');
-
+  background: url('./static/background.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+body>div>h1{
+  color: lightgray;
+  text-decoration: underline;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -123,34 +136,50 @@ ul{
 .image{
   height:200px
 }
+.image:hover{
+  height:300px
+}
 .small-image{
   height:50px
 }
 #character_select{
-position: absolute;
+  top:25%;
+  left:5%
+}
+.add_button{
+top:39%;
+left: 15%
 }
 body>div>div>button{
   position: absolute;
 }
 .character-details{
   background-color: rgba(0, 0, 0, 0.5);
-  /* position: absolute; */
-  /* align-self: center; */
+  width: 18%;
+}
+.favorite_list{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50%;
+
 }
 .drop-down{
-  /* display: flex; */
   justify-content: space-between;
   align-self:auto;
 }
 .episode-drop-down{
-  display: flex;
-  /* justify-content: space-between; */
-  align-self:left;
+  top:50%;
+  left: 25%
 }
 #episode_select{
-position: absolute;
+position: absolute right
+}
+.episode_header{
+  color: lightgray;
+  left: 10%
 }
 .episode-details{
   background-color: rgba(0, 0, 0, 0.5);
+  width: 20%;
+  position: 50%
 }
 </style>
